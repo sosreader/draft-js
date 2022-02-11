@@ -260,9 +260,8 @@ class DraftEditor extends React.Component<DraftEditorProps, State> {
     }
 
     // See `restoreEditorDOM()`.
-    this.state = {contentsKey: 0};
+    this.state = {contentsKey: 0, blockKeyMap: new Map({})};
   }
-  this.state = {contentsKey: 0, blockKeyMap: new Map({})};
 
   /**
    * Build a method that will pass the event to the specified handler method.
