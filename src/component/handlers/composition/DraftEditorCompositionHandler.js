@@ -27,6 +27,7 @@ const getEntityKeyForSelection = require('getEntityKeyForSelection');
 const nullthrows = require('nullthrows');
 
 const isIE = UserAgent.isBrowser('IE');
+const isIos = UserAgent.isPlatform('iOS');
 
 /**
  * Millisecond delay to allow `compositionstart` to fire again upon
@@ -226,7 +227,6 @@ const DraftEditorCompositionHandler = {
     );
     const compositionEndSelectionState = documentSelection.selectionState;
 
-
     // See:
     // - https://github.com/facebook/draft-js/issues/2093
     // - https://github.com/facebook/draft-js/pull/2094
@@ -239,9 +239,11 @@ const DraftEditorCompositionHandler = {
     const anchorKey = compositionEndSelectionState.getAnchorKey();
     const focusKey = compositionEndSelectionState.getFocusKey();
 
-    anchorKey === focusKey
-      ? editor.restoreBlockDOM(anchorKey)
-      : editor.restoreEditorDOM();
+    if (anchorKey === focusKey && !isIos) {
+      editor.restoreBlockDOM(anchorKey);
+    } else {
+      editor.restoreEditorDOM();
+    }
 
     editor.update(
       EditorState.push(
