@@ -27,7 +27,10 @@ const getEntityKeyForSelection = require('getEntityKeyForSelection');
 const nullthrows = require('nullthrows');
 
 const isIE = UserAgent.isBrowser('IE');
-const isIos = UserAgent.isDevice('iPad') || UserAgent.isDevice('iPhone');
+const isIos =
+  UserAgent.isDevice('iPad') ||
+  UserAgent.isDevice('iPhone') ||
+  UserAgent.isDevice('Mobile Safari');
 
 /**
  * Millisecond delay to allow `compositionstart` to fire again upon
