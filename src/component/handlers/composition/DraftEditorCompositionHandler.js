@@ -30,7 +30,7 @@ const isIE = UserAgent.isBrowser('IE');
 const isIos =
   UserAgent.isDevice('iPad') ||
   UserAgent.isDevice('iPhone') ||
-  UserAgent.isDevice('Mobile Safari');
+  UserAgent.isBrowser('Safari');
 
 /**
  * Millisecond delay to allow `compositionstart` to fire again upon
